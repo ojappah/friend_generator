@@ -1,6 +1,7 @@
-require "friend_generator/version"
+require_relative "./friend_generator/version"
 
-module FriendGenerator
-  class Error < StandardError; end
+#module FriendGenerator
+#  class Error < StandardError; end
   # Your code goes here...
-end
+#end
+require_relative "./friend_generator/cli"
