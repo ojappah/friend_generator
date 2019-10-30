@@ -3,6 +3,7 @@ class FriendGenerator::CLI
   def call
     friend_options
     friend_selection
+    my_friends
   end
 
 def friend_options
@@ -16,8 +17,27 @@ end
 
 
 def friend_selection
-puts "Enter a number from the options above to generate a new friend or type my friends to see a list of your current friends. Type exit to leave the app."
   input = nil
-  input = gets.strip.downcase
+  while input != "exit"
+    puts "Enter a number from the options above to generate a new friend or type my friends to see a list of your current friends. Type exit to leave the app."
+    input = gets.strip.downcase
+    case input
+    when "1"
+      puts "Congratulations! You have a new Male Friend. Type my friends to see details about your new friend."
+
+    when "2"
+      puts "Congratulations! You have a new Female Friend.Type my friends to see details about your new friend."
+
+    when "3"
+      puts "Congratulations! You have a new randomly generated Friend.Type my friends to see details about your new friend."
+
+    when "my friends"
+      puts "Here is a list of your new friends."
+      my_friends
+    else
+      puts "That is not a valid option. Please select from the options given below."
+      friend_options
+  end
+end
 end
 end
