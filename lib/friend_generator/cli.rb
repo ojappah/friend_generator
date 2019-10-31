@@ -3,7 +3,8 @@ class FriendGenerator::CLI
   def call
     friend_options
     friend_selection
-    my_friends
+    #my_friends
+    exit
   end
 
 def friend_options
@@ -33,11 +34,16 @@ def friend_selection
 
     when "my friends"
       puts "Here is a list of your new friends."
-      my_friends
+      #my_friends
     else
-      puts "That is not a valid option. Please select from the options given below."
+      puts "That is not a valid option. Please try again. Select from the options given below."
+
       friend_options
   end
 end
+end
+
+def exit
+  puts "Thank you for using Friend Generator. Come back soon to generate more friends."
 end
 end
