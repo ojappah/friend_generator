@@ -28,12 +28,12 @@ class FriendGenerator::Friend
   end
 
   def self.scrape_male
-    html = open("https://www.fakenamegenerator.com/gen-male-us-us.php")
-    doc = Nokogiri::HTML.parse(html)
+    doc = Nokogiri::HTML.parse(open("https://www.fakenamegenerator.com/gen-male-us-us.php"))
     friend_data = doc.css("div.info.content")
     friend_data.each do |data|
-    male_friend = Hash.new
-    male_friend[:name] = friend_data.css("div.address.h3")
+    #male_friend = Hash.new
+    #male_friend[:name] = friend_data.css("div.address.h3")
+    @name = friend_data.css("div.address.h3")
     male_friend[:address] = friend_data.css("div.adr")
     male_friend[:phone] = friend_data.css("div.extra > dl:nth-child(5) > dd")
     male_friend[:birthday] = friend_data.css("div.extra > dl:nth-child(8) > dd")
@@ -68,4 +68,6 @@ class FriendGenerator::Friend
 
 
 end
-  
+end
+end
+end

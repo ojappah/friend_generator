@@ -23,23 +23,24 @@ class FriendGenerator::CLI
       input = gets.strip.downcase
       case input
         when "1"
-          puts "Congratulations! You have a new friend name #{male_friend[:name]}. He is #{male_friend[:age]} years old. Type 'my friends' to see more details about your new friend."
-          male_friend
+          puts "Congratulations! You have a new friend name #{[:name]}. He is #{[:age]} years old. Type 'my friends' to see more details about your new friend."
+
         when "2"
           puts "Congratulations! You have a new friend name #{female_friend[:name]}. She is #{female_friend[:age]} years old. Type 'my friends' to see more details about your new friend."
-          female_friend
+
         when "3"
-          puts "Congratulations! You have a new random friend name #{random_friend[:name]}. Your friend is #{random_friend[:age]} years old. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new random friend name #{random[:name]}. Your friend is #{random[:age]} years old. Type 'my friends' to see more details about your new friend."
 
         when "my friends"
           puts "Here is a list of all your new friends."
           @@all
-        when "exit"
-          puts "Thank you for using Friend Generator. Come back soon to generate more friends."
         else
           puts "That is not a valid option. Please try again. Select from the options given below."
         friend_options
       end
+        def exit
+          puts "Thank you for using Friend Generator. Come back soon to make new friends."
+        end
     end
   end
 
