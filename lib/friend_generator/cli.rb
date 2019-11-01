@@ -14,24 +14,26 @@ def friend_options
     2. Female
     3. Random
   DOC
+  @friends = FriendGenerator::Friend.all
 end
 
 
 def friend_selection
   input = nil
   while input != "exit"
-    puts "Enter a number from the options above to generate a new friend or type my friends to see a list of your current friends. Type exit to leave the app."
+    puts "Please enter a number from the options above to generate a new friend or type my friends to see a list of your current friends. Type 'exit' to leave the app."
     input = gets.strip.downcase
     case input
     when "1"
-      puts "Congratulations! You have a new Male Friend. Type my friends to see details about your new friend."
 
+      puts "Congratulations! You have a new Male Friend. Type my friends to see details about your new friend."
+      male_friend
     when "2"
       puts "Congratulations! You have a new Female Friend.Type my friends to see details about your new friend."
-
+      female_friend
     when "3"
       puts "Congratulations! You have a new randomly generated Friend.Type my friends to see details about your new friend."
-
+      random_friend
     when "my friends"
       puts "Here is a list of your new friends."
       #my_friends
