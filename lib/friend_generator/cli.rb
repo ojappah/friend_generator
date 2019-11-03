@@ -1,8 +1,15 @@
 class FriendGenerator::CLI
+  MALE_PATH = "http://www.fakenamegenerator.com/gen-male-us-us.php"
+  FEMALE_PATH = "http://www.fakenamegenerator.com/gen-female-us-us.php"
+  RANDOM_PATH = "https://www.fakenamegenerator.com/gen-random-us-us.php"
+
   def call
     friend_options
+    make_male_friends
+    make_female_friends
+    make_random_friends
     friend_selection
-    self.create
+    display_friends
     exit
   end
 
@@ -15,22 +22,30 @@ class FriendGenerator::CLI
     DOC
   end
 
-  def self.create
-      friends.each do |friend|
-        Friend.new(friends)
-      end
-    end
-  def friend_selection
+  def make_male_friends
+    @friends_array = FriendGenerator::Friend.scrape_index_page(MALE_PATH)
+    self.create_from_collection(@friends_array)
+  end
 
+  def make_female_friends
+  @friends_array = FriendGenerator::Friend.scrape_index_page(FEMALE_PATH)
+  FriendGenerator::Friend.create_from_collection(@friends_array)
+end
+
+def make_random_friends
+  @friends_array = FriendGenerator::Friend.scrape_index_page(RANDOM_PATH)
+  FriendGenerator::Friend.create_from_collection(@friends_array)
+end
+  def friend_selection
+    Friend.all.each do |friend|
     input = nil
     while input != "exit"
       puts "Please enter a number from the options above to generate a new friend or type my friends to see a list of your current friends. Type 'exit' to leave the app."
       input = gets.strip.downcase
-      @friends = FriendGenerator::Friend
       case input
         when "1"
-          puts "Congratulations! You have a new friend name #{name.upcase}. He is #{age} years old. Type 'my friends' to see more details about your new friend."
-
+          puts "Congratulations! You have a new friend name #{friend.name.upcase}. He is #{friend.age} years old. Type 'my friends' to see more details about your new friend."
+            create
         when "2"
           puts "Congratulations! You have a new friend name #{friend.name.upcase}. She is #{friend.age} years old. Type 'my friends' to see more details about your new friend."
 
@@ -50,4 +65,5 @@ class FriendGenerator::CLI
     end
   end
 
+end
 end
