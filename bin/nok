@@ -1,0 +1,18 @@
+require "nokogiri"
+require "open-uri"
+def self.scrape_female
+index_page = Nokogiri::HTML(open("http://www.fakenamegenerator.com/gen-female-us-us.php"))
+friends = []
+index_page.css("div.info.content").each do |data|
+  data.css(".friend-data a").each do |friend|
+    friend_name = friend.css('div.address.h3').text
+    friend_address = friend.css('div.adr').text
+    friend_phone = friend.css('div.extra > dl:nth-child(5) > dd').text
+    friend_birthday = friend.css('div.extra > dl:nth-child(8) > dd').text
+    friend_age = friend.css('div.extra > dl:nth-child(9) > dd').text
+
+    friends << {name: friend_name, address: friend_address, phone: friend_phone, birthday: friend_birthday, age: friend_age}
+  end
+end
+puts self.scrape_female
+end

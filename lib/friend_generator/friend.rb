@@ -3,69 +3,80 @@ class FriendGenerator::Friend
   attr_accessor :name, :address, :phone, :birthday, :age
 
   @@all = []
-  def self.all
-    self.scrape_male_friends
-    self.scrape_female_friends
-    self.scrape_random_friends
+
+  def initialize(name, address,phone,birthday,age)
+    @name = name
+    @address = address
+    @phone = phone
+    @birthday = birthday
+    @age = age
+    @@all << self
   end
 
-  def self.scrape_male_friends
-    @male_friends = []
-    self.scrape_male
-    @male_friends
+  def self.all
+@@all
   end
+
+  #def self.scrape_male_friends
+  #  self.scrape_male.each do |male_friend|
+  #    friend = Friend.new
+  #    friend.name
+
+  #end
 
   def self.scrape_female_friends
-    @female_friends = []
     self.scrape_female
-    @female_friends
+
   end
 
   def self.scrape_random_friends
-    @random_friends = []
     self.scrape_random
-    @random_friends
+
   end
 
-  def self.scrape_male
-    doc = Nokogiri::HTML.parse(open("https://www.fakenamegenerator.com/gen-male-us-us.php"))
-    friend_data = doc.css("div.info.content")
-    friend_data.each do |data|
-    #male_friend = Hash.new
-    #male_friend[:name] = friend_data.css("div.address.h3")
-    @name = friend_data.css("div.address.h3")
-    male_friend[:address] = friend_data.css("div.adr")
-    male_friend[:phone] = friend_data.css("div.extra > dl:nth-child(5) > dd")
-    male_friend[:birthday] = friend_data.css("div.extra > dl:nth-child(8) > dd")
-    male_friend[:age] = friend_data.css("div.extra > dl:nth-child(9) > dd")
-  end
+  def scrape_male
+    index_page = Nokogiri::HTML(open("http://www.fakenamegenerator.com/gen-male-us-us.php"))
+    friends = []
+    index_page.css("div.info.content").each do |data|
+      data.css(".friend-data a").each do |friend|
+        friend_name = friend.css('div.address.h3').text
+        friend_address = friend.css('div.adr').text
+        friend_phone = friend.css('div.extra > dl:nth-child(5) > dd').text
+        friend_birthday = friend.css('div.extra > dl:nth-child(8) > dd').text
+        friend_age = friend.css('div.extra > dl:nth-child(9) > dd').text
 
-  def self.scrape_female
-    html = open("https://www.fakenamegenerator.com/gen-female-us-us.php")
-    doc = Nokogiri::HTML.parse(html)
-    friend_data = doc.css("div.info.content")
-    friend_data.each do |data|
-    female_friend = Hash.new
-    female_friend[:name] = friend_data.css("div.address.h3")
-    female_friend[:address] = friend_data.css("div.adr")
-    female_friend[:phone] = friend_data.css("div.extra > dl:nth-child(5) > dd")
-    female_friend[:birthday] = friend_data.css("div.extra > dl:nth-child(8) > dd")
-    female_friend[:age] = friend_data.css("div.extra > dl:nth-child(9) > dd")
-  end
+        friends << {name: friend_name, address: friend_address, phone: friend_phone, birthday: friend_birthday, age: friend_age}
+      end
+    end
 
-  def self.scrape_random
-    html = open("https://www.fakenamegenerator.com/gen-random-us-us.php")
-    doc = Nokogiri::HTML.parse(html)
-    friend_data = doc.css("div.info.content")
-    friend_data.each do |data|
-    random_friend = Hash.new
-    random_friend[:name] = friend_data.css("div.address.h3")
-    random_friend[:address] = friend_data.css("div.adr")
-    random_friend[:phone] = friend_data.css("div.extra > dl:nth-child(5) > dd")
-    random_friend[:birthday] = friend_data.css("div.extra > dl:nth-child(8) > dd")
-    random_friend[:age] = friend_data.css("div.extra > dl:nth-child(9) > dd")
-  end
+  def scrape_female
+  index_page = Nokogiri::HTML(open("http://www.fakenamegenerator.com/gen-female-us-us.php"))
+  friends = []
+  index_page.css("div.info.content").each do |data|
+    data.css(".friend-data a").each do |friend|
+      friend_name = friend.css('div.address.h3').text
+      friend_address = friend.css('div.adr').text
+      friend_phone = friend.css('div.extra > dl:nth-child(5) > dd').text
+      friend_birthday = friend.css('div.extra > dl:nth-child(8) > dd').text
+      friend_age = friend.css('div.extra > dl:nth-child(9) > dd').text
 
+      friends << {name: friend_name, address: friend_address, phone: friend_phone, birthday: friend_birthday, age: friend_age}
+    end
+  end
+  def scrape_random
+  index_page = Nokogiri::HTML(open("https://www.fakenamegenerator.com/gen-random-us-us.php"))
+  friends = []
+  index_page.css("div.info.content").each do |data|
+    data.css(".friend-data a").each do |friend|
+      friend_name = friend.css('div.address.h3').text
+      friend_address = friend.css('div.adr').text
+      friend_phone = friend.css('div.extra > dl:nth-child(5) > dd').text
+      friend_birthday = friend.css('div.extra > dl:nth-child(8) > dd').text
+      friend_age = friend.css('div.extra > dl:nth-child(9) > dd').text
+
+      friends << {name: friend_name, address: friend_address, phone: friend_phone, birthday: friend_birthday, age: friend_age}
+    end
+  end
 
 end
 end

@@ -12,9 +12,8 @@ class FriendGenerator::CLI
     2. Female
     3. Random
     DOC
-    @friends = FriendGenerator::Friend.all
+    #@friends = FriendGenerator::Friend.all
   end
-
 
   def friend_selection
     input = nil
@@ -23,13 +22,13 @@ class FriendGenerator::CLI
       input = gets.strip.downcase
       case input
         when "1"
-          puts "Congratulations! You have a new friend name #{[:name]}. He is #{[:age]} years old. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new friend name #{:name}. He is #{:age} years old. Type 'my friends' to see more details about your new friend."
 
         when "2"
-          puts "Congratulations! You have a new friend name #{female_friend[:name]}. She is #{female_friend[:age]} years old. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new friend name #{:name}. She is #{:age} years old. Type 'my friends' to see more details about your new friend."
 
         when "3"
-          puts "Congratulations! You have a new random friend name #{random[:name]}. Your friend is #{random[:age]} years old. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new random friend name #{:name}. Your friend is #{:age} years old. Type 'my friends' to see more details about your new friend."
 
         when "my friends"
           puts "Here is a list of all your new friends."
