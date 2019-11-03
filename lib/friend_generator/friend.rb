@@ -1,19 +1,19 @@
 class FriendGenerator::Friend
 
   attr_accessor :name, :address, :phone, :birthday, :age
-
-def self.today
-  #scraping website and returning data.
-  self.scrape_friends
+@@all = []
+def initialize(name, address, phone, birthday, age)
+  @name = name
+  @address = address
+  @phone = phone
+  @birthday = birthday
+  @age = age
+end
+@@all << self
+def self.all
+@@all
 end
 
-def self.scrape_friends
-  friends = []
-  #friends << make_male_friends
-  #friends << make_female_friends
-  #friends << make_random_friends
-  #friends
-end
 
 def get_male_page
   Nokogiri::HTML(open("http://www.fakenamegenerator.com/gen-male-us-us.php"))
@@ -25,6 +25,7 @@ end
 
 def make_male_friends
     friend = self.new
+    make_male_friends = []
     friend.name = friend.css('div.address.h3').text
     friend.address = friend.css('div.address.h3').text
     friend.phone = friend.css('div.extra > dl:nth-child(5) > dd').text
@@ -45,6 +46,7 @@ end
 
 def make_female_friends
   friend = self.new
+  make_female_friends = []
   friend.name = friend.css('div.address.h3').text
   friend.address = friend.css('div.address.h3').text
   friend.phone = friend.css('div.extra > dl:nth-child(5) > dd').text
@@ -64,6 +66,7 @@ end
 
 def make_random_friends
   friend = self.new
+  make_random_friends = []
   friend.name = friend.css('div.address.h3').text
   friend.address = friend.css('div.address.h3').text
   friend.phone = friend.css('div.extra > dl:nth-child(5) > dd').text
@@ -72,6 +75,7 @@ def make_random_friends
   friends << make_random_friends
   friend
   end
+
 
 
 end

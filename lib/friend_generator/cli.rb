@@ -2,6 +2,7 @@ class FriendGenerator::CLI
   def call
     friend_options
     friend_selection
+    self.create
     exit
   end
 
@@ -14,20 +15,25 @@ class FriendGenerator::CLI
     DOC
   end
 
+  def self.create
+      friends.each do |friend|
+        Friend.new(friends)
+      end
+    end
   def friend_selection
 
     input = nil
     while input != "exit"
       puts "Please enter a number from the options above to generate a new friend or type my friends to see a list of your current friends. Type 'exit' to leave the app."
       input = gets.strip.downcase
-      @friends = FriendGenerator::Friend.today
+      @friends = FriendGenerator::Friend
       case input
         when "1"
           puts "Congratulations! You have a new friend name #{name.upcase}. He is #{age} years old. Type 'my friends' to see more details about your new friend."
-          @@all
+
         when "2"
           puts "Congratulations! You have a new friend name #{friend.name.upcase}. She is #{friend.age} years old. Type 'my friends' to see more details about your new friend."
-          print_friends
+
         when "3"
           puts "Congratulations! You have a new random friend name #{friend.name.upcase}. Your friend is #{friend.age} years old. Type 'my friends' to see more details about your new friend."
 
