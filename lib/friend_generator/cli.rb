@@ -43,24 +43,25 @@ def make_random_friends
 end
   def friend_selection
 
-    @@friends_array.each do |friend|
+    #@@friends_array.each do |friend|
     input = nil
     while input != "exit"
       puts "Please enter a number from the options above to generate a new friend or type my friends to see a list of your current friends. Type 'exit' to leave the app."
       input = gets.strip.downcase
       case input
         when "1"
-          puts "Congratulations! You have a new friend name #{friend.name.upcase}. He is #{friend.age} years old. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new friend name #{@@make_male_friends[0].name.upcase}. He is #{@@make_male_friends[0].age} years old. Type 'my friends' to see more details about your new friend."
 
         when "2"
-          puts "Congratulations! You have a new friend name #{friend.name.upcase}. She is #{friend.age} years old. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new friend name #{@@make_female_friends[0].name}. She is #{@@make_male_friends[0].age} years old. Type 'my friends' to see more details about your new friend."
 
         when "3"
-          puts "Congratulations! You have a new random friend name #{friend.name.upcase}. Your friend is #{friend.age} years old. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new random friend name #{@@make_male_friends[0].name.upcase}. Your friend is #{@@make_male_friends[0].age} years old. Type 'my friends' to see more details about your new friend."
 
         when "my friends"
-          puts "Here is a list of all your new friends."
-
+          @@friends_array.flatten.each do |friends|
+          puts "Here is the name of all your new friends #{friends.name.upcase}."
+        end
         else
           puts "That is not a valid option. Please try again. Select from the options given below."
         friend_options
@@ -70,7 +71,5 @@ end
         end
     end
 
-
-end
 end
 end
