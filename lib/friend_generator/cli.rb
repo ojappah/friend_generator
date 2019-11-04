@@ -50,26 +50,27 @@ end
       input = gets.strip.downcase
       case input
         when "1"
-          puts "Congratulations! You have a new friend name #{@@make_male_friends[0].name.upcase}. He is #{@@make_male_friends[0].age} years old. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new friend name #{@@make_male_friends[0].name.upcase}. He was born on #{@@make_male_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
 
         when "2"
-          puts "Congratulations! You have a new friend name #{@@make_female_friends[0].name}. She is #{@@make_male_friends[0].age} years old. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new friend name #{@@make_female_friends[0].name}. She was born on #{@@make_male_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
 
         when "3"
-          puts "Congratulations! You have a new random friend name #{@@make_male_friends[0].name.upcase}. Your friend is #{@@make_male_friends[0].age} years old. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new randomly generated friend name #{@@make_male_friends[0].name.upcase}. Your new friend was born on #{@@make_male_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
 
         when "my friends"
           @@friends_array.flatten.each do |friends|
-          puts "Here is the name of all your new friends #{friends.name.upcase}."
+          puts "Here you can find more details about your newly created friends."
+          puts "Name:#{friends.name.upcase}, \nAddress:#{friends.address} \n Phone:#{friends.phone}, \n DOB:#{friends.birthday}, \n Age:#{friends.age}."
         end
         else
           puts "That is not a valid option. Please try again. Select from the options given below."
         friend_options
       end
-        def exit
-          puts "Thank you for using Friend Generator. Come back soon to make new friends."
-        end
+      def exit
+        puts "Thank you for using Friend Generator. Come back soon to make new friends."
     end
 
+end
 end
 end

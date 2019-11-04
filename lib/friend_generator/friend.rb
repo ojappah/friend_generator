@@ -11,7 +11,7 @@ def initialize(name, address, phone, birthday, age)
     @address = address
     @phone = phone
     @birthday = birthday
-    @age = birthday
+    @age = age
 
 #self.all.split("\n").each do |name, address,phone,birthday,age|
 #friend_hash.split("\n").each_with_index do |attribute, value|
@@ -41,5 +41,8 @@ def self.scrape_index_page(index_page)
         age = friend.css('div.extra > dl:nth-child(9) > dd').text
         FriendGenerator::Friend.new(name, address, phone, birthday, age)
         #friends_array << {name: friend_name, address: friend_address, phone: friend_phone, birthday: friend_birthday, age: friend_age}
+      end
+      def self.reset_all
+        @@all.clear
       end
 end
