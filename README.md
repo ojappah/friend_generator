@@ -1,8 +1,7 @@
 # FriendGenerator
-#Hello World
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/friend_generator`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to my Friend Generator Application. 
 
-TODO: Delete this and the text above, and describe your gem
+This is a simple CLI application that allows a user to create a new instance of a Friend. The user have an option to choose a male, female or a random friend. Each friend is create based of the user input. Once friends are created, the user can call 'my friends' to see a listing of all the user friends and also get more details on each friend.
 
 ## Installation
 
@@ -22,7 +21,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+TODO: to use this application run ruby bin/friend_generator. Select from the options presented and follow the instructions. Enjoy making new friends.
 
 ## Development
 
