@@ -3,74 +3,88 @@ class FriendGenerator::CLI
   FEMALE_PATH = "http://www.fakenamegenerator.com/gen-female-us-us.php"
   RANDOM_PATH = "https://www.fakenamegenerator.com/gen-random-us-us.php"
 @@friends_array = []
-@@make_male_friends = []
-@@make_female_friends = []
-@@make_random_friends = []
+@@male_friends = []
+@@female_friends = []
+@@random_friends = []
   def call
-    friend_options
-    make_male_friends
-    make_female_friends
-    make_random_friends
+    menu
+    create_friends
     friend_selection
-    exit
+    goodbye
   end
 
-  def friend_options
-    puts "Welcome to Friend Generator. What type of Friend are you looking for today?"
+  def menu
+    puts "Welcome to Friend Generator. Enter an option number from below to generate a new Friend or display current friends."
     puts <<-DOC.gsub /^\s*/, ''
-    1. Male
-    2. Female
-    3. Random
+    1. Option 1 - Create Male Friend
+    2. Option 2 - Create Female Friend
+    3. Option 3 - Create Random Friend
+    4. Option 4 - Display Male Friends
+    5. Option 5 - Display Female Friends
+    6. Option 6 - Display Random Friends
     DOC
   end
 
-  def make_male_friends
-    @@make_male_friends << FriendGenerator::Friend.scrape_index_page(MALE_PATH)
-  #  self.create_from_collection(@friends_array)
-    @@friends_array << @@make_male_friends
+  def create_friends
+    @@male_friends << FriendGenerator::Friend.scrape_index_page(MALE_PATH)
+    @@friends_array << @@male_friends
+    @@female_friends << FriendGenerator::Friend.scrape_index_page(FEMALE_PATH)
+    @@friends_array << @@female_friends
+    @@random_friends << FriendGenerator::Friend.scrape_index_page(RANDOM_PATH)
+    @@friends_array << @@random_friends
   end
 
-  def make_female_friends
-    @@make_female_friends << FriendGenerator::Friend.scrape_index_page(FEMALE_PATH)
-  #  self.create_from_collection(@friends_array)
-  @@friends_array << @@make_female_friends
-  end
-
-def make_random_friends
-  @@make_random_friends << FriendGenerator::Friend.scrape_index_page(RANDOM_PATH)
-#  self.create_from_collection(@friends_array)
-  @@friends_array << @@make_random_friends
-end
   def friend_selection
 
-    #@@friends_array.each do |friend|
     input = nil
-    while input != "exit"
-      puts "Please enter a number from the options above to generate a new friend or type my friends to see a list of your current friends. Type 'exit' to leave the app."
+    while input != "goodbye"
+    puts  "Type 'Friends' to see more details on all of your created friends. Type 'goodbye' to leave the app."
       input = gets.strip.downcase
       case input
         when "1"
-          puts "Congratulations! You have a new friend name #{@@make_male_friends[0].name.upcase}. He was born on #{@@make_male_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new friend name #{@@male_friends[0].name.upcase}. He was born on #{@@male_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
 
         when "2"
-          puts "Congratulations! You have a new friend name #{@@make_female_friends[0].name}. She was born on #{@@make_male_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new friend name #{@@female_friends[0].name}. She was born on #{@@male_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
 
         when "3"
-          puts "Congratulations! You have a new randomly generated friend name #{@@make_male_friends[0].name.upcase}. Your new friend was born on #{@@make_male_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
+          puts "Congratulations! You have a new randomly generated friend name #{@@random_friends[0].name.upcase}. Your new friend was born on #{@@random_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
 
         when "my friends"
           @@friends_array.flatten.each do |friends|
           puts "Here you can find more details about your newly created friends."
-          puts "Name:#{friends.name.upcase}, \nAddress:#{friends.address} \n Phone:#{friends.phone}, \n DOB:#{friends.birthday}, \n Age:#{friends.age}."
+          puts "Name:#{friends.name.upcase}, \nAddress:#{friends.address}\n Phone: #{friends.phone}, \n DOB: #{friends.birthday}, \n Age: #{friends.age}."
         end
-        else
-          puts "That is not a valid option. Please try again. Select from the options given below."
-        friend_options
+
+      when "4"
+        @@male_friends.flatten.each do |friends|
+        puts "Here is a list of all your male friends."
+        puts "Name:#{friends.name.upcase}, \nAddress:#{friends.address} \n Phone: #{friends.phone}, \n DOB: #{friends.birthday}, \n Age: #{friends.age}."
       end
-      def exit
-        puts "Thank you for using Friend Generator. Come back soon to make new friends."
+
+    when "5"
+      @@female_friends.flatten.each do |friends|
+      puts "Here is a list of all your female friends."
+      puts "Name:#{friends.name.upcase}, \nAddress:#{friends.address} \n Phone: #{friends.phone}, \n DOB: #{friends.birthday}, \n Age: #{friends.age}."
     end
 
+  when "6"
+    @@random_friends.flatten.each do |friends|
+    puts "Here is a list of all your randomly created friends."
+    puts "Name:#{friends.name.upcase}, \nAddress:#{friends.address} \n Phone: #{friends.phone}, \n DOB: #{friends.birthday}, \n Age: #{friends.age}."
+  end
+
+when "goodbye"
+          goodbye
+      else
+          puts "That is not a valid option. Please try again. Select from the options given below."
+          menu
+        end
+
+        def goodbye
+          puts "Thank you for using Friend Generator. Come back soon to create new friends."
+        exit
+      end
 end
 end
 end
