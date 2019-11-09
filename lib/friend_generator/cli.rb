@@ -13,14 +13,11 @@ class FriendGenerator::CLI
   end
 
   def menu
-    puts "Welcome to Friend Generator. Enter an option number from below to generate a new Friend or display current friends."
+    puts "Welcome to Friend Generator. Enter an option number from below to generate a new Friend or display current friends by typing 'friends'."
     puts <<-DOC.gsub /^\s*/, ''
     1. Option 1 - Create Male Friend
     2. Option 2 - Create Female Friend
     3. Option 3 - Create Random Friend
-    4. Option 4 - Display Male Friends
-    5. Option 5 - Display Female Friends
-    6. Option 6 - Display Random Friends
     DOC
   end
 
@@ -41,13 +38,13 @@ class FriendGenerator::CLI
         input = gets.strip.downcase
         case input
             when "1"
-                puts "Congratulations! You have a new friend name #{@@male_friends[0].name.upcase}. He was born on #{@@male_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
+                puts "Congratulations! You have a new friend name #{@@male_friends[0].name.upcase}. He was born on #{@@male_friends[0].birthday}. Type '4' to see more details about your male friend."
 
             when "2"
-                puts "Congratulations! You have a new friend name #{@@female_friends[0].name}. She was born on #{@@male_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
+                puts "Congratulations! You have a new friend name #{@@female_friends[0].name}. She was born on #{@@male_friends[0].birthday}. Type '5' to see more details about your female friend."
 
             when "3"
-                puts "Congratulations! You have a new randomly generated friend name #{@@random_friends[0].name.upcase}. Your new friend was born on #{@@random_friends[0].birthday}. Type 'my friends' to see more details about your new friend."
+                puts "Congratulations! You have a new randomly generated friend name #{@@random_friends[0].name.upcase}. Your new friend was born on #{@@random_friends[0].birthday}. Type '6' to see more details about your random friend."
 
             when "friends"
                 @@friends_array.flatten.each do |friends|
