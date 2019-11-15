@@ -1,7 +1,7 @@
 # FriendGenerator
-Welcome to my Friend Generator Application. 
+Welcome to my Friend Generator Application.
 
-This is a simple CLI application that allows a user to create a new instance of a Friend. The user have an option to choose a male, female or a random friend. Each friend is create based of the user input. Once friends are created, the user can call 'my friends' to see a listing of all the user friends and also get more details on each friend.
+This is a simple CLI application that allows a user to create a new instance of a Friend. The user have an option to choose a male, female or a random friend. Each friend is create based of the user input. Once friends are created, the user can call 'friends' to see a listing of all the user friends and also get more details on each friend.
 
 ## Installation
 

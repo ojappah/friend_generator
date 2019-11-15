@@ -3,9 +3,7 @@ class FriendGenerator::CLI
   FEMALE_PATH = "http://www.fakenamegenerator.com/gen-female-us-us.php"
   RANDOM_PATH = "https://www.fakenamegenerator.com/gen-random-us-us.php"
   @@friends_array = []
-  @@male_friends = []
-  @@female_friends = []
-  @@random_friends = []
+
   def call
     menu
     create_friends
@@ -22,12 +20,21 @@ class FriendGenerator::CLI
   end
 
   def create_friends
-    @@male_friends << FriendGenerator::Friend.scrape_index_page(MALE_PATH)
-    @@friends_array << @@male_friends
-    @@female_friends << FriendGenerator::Friend.scrape_index_page(FEMALE_PATH)
-    @@friends_array << @@female_friends
-    @@random_friends << FriendGenerator::Friend.scrape_index_page(RANDOM_PATH)
-    @@friends_array << @@random_friends
+      @@friends_array << FriendGenerator::Friend.scrape_index_page(MALE_PATH,"Male")
+      @@friends_array << FriendGenerator::Friend.scrape_index_page(FEMALE_PATH, "Female")
+      @@friends_array<< FriendGenerator::Friend.scrape_index_page(RANDOM_PATH, "Random")
+  end
+
+  def male_friends
+male_friends
+  end
+
+  def female_friends
+female_friends
+  end
+
+  def random_friends
+random_friends
   end
 
   def friend_selection
@@ -38,13 +45,13 @@ class FriendGenerator::CLI
         input = gets.strip.downcase
         case input
             when "1"
-                puts "Congratulations! You have a new friend name #{@@male_friends[0].name.upcase}. He was born on #{@@male_friends[0].birthday}. Type '4' to see more details about your male friend."
+                puts "Congratulations! You have a new friend name #{male_friends[0].name.upcase}. He was born on #{male_friends[0].birthday}. Type '4' to see more details about your male friend."
 
             when "2"
-                puts "Congratulations! You have a new friend name #{@@female_friends[0].name}. She was born on #{@@male_friends[0].birthday}. Type '5' to see more details about your female friend."
+                puts "Congratulations! You have a new friend name #{female_friends[0].name}. She was born on #{female_friends[0].birthday}. Type '5' to see more details about your female friend."
 
             when "3"
-                puts "Congratulations! You have a new randomly generated friend name #{@@random_friends[0].name.upcase}. Your new friend was born on #{@@random_friends[0].birthday}. Type '6' to see more details about your random friend."
+                puts "Congratulations! You have a new randomly generated friend name #{random_friends[0].name.upcase}. Your new friend was born on #{random_friends[0].birthday}. Type '6' to see more details about your random friend."
 
             when "friends"
                 @@friends_array.flatten.each do |friends|
@@ -53,19 +60,19 @@ class FriendGenerator::CLI
                 end
 
             when "4"
-                @@male_friends.flatten.each do |friends|
+                male_friends.flatten.each do |friends|
                 puts "Here is a list of all your male friends."
                 puts "Name:#{friends.name.upcase}, \nAddress:#{friends.address} \n Phone: #{friends.phone}, \n DOB: #{friends.birthday}, \n Age: #{friends.age}."
                 end
 
             when "5"
-                @@female_friends.flatten.each do |friends|
+                female_friends.flatten.each do |friends|
                 puts "Here is a list of all your female friends."
                 puts "Name:#{friends.name.upcase}, \nAddress:#{friends.address} \n Phone: #{friends.phone}, \n DOB: #{friends.birthday}, \n Age: #{friends.age}."
                 end
 
             when "6"
-                @@random_friends.flatten.each do |friends|
+                random_friends.flatten.each do |friends|
                 puts "Here is a list of all your randomly created friends."
                 puts "Name:#{friends.name.upcase}, \nAddress:#{friends.address} \n Phone: #{friends.phone}, \n DOB: #{friends.birthday}, \n Age: #{friends.age}."
                 end

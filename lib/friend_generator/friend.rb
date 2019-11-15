@@ -1,9 +1,9 @@
 class FriendGenerator::Friend
 
-    attr_accessor :name, :address, :phone, :birthday, :age
+    attr_accessor :name, :address, :phone, :birthday, :age, :gender
 
 
-    def initialize(name, address, phone, birthday, age)
+    def initialize(name, address, phone, birthday, age, gender)
 
       @name = name
       @address = address
@@ -13,7 +13,7 @@ class FriendGenerator::Friend
     end
 
 
-    def self.scrape_index_page(index_page)
+    def self.scrape_index_page(index_page,gender)
         friends_array = []
         index_page = Nokogiri::HTML(open(index_page))
         friend = index_page.css("div.info .content")
